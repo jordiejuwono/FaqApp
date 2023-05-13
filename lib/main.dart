@@ -1,14 +1,18 @@
-import 'package:faq_app/presentation/authentication/provider/login_notifier.dart';
-import 'package:faq_app/presentation/authentication/ui/login_page.dart';
-import 'package:faq_app/presentation/home_page/provider/home_notifier.dart';
-import 'package:faq_app/presentation/home_page/ui/home_page.dart';
-import 'package:faq_app/presentation/splash_screen/provider/splash_notifier.dart';
-import 'package:faq_app/presentation/splash_screen/ui/splash_screen.dart';
+import 'package:faq_app/common/utils.dart';
+import 'package:faq_app/presentation/screen/authentication/ui/login_page.dart';
+import 'package:faq_app/presentation/screen/detail/provider/detail_notifier.dart';
+import 'package:faq_app/presentation/screen/detail/ui/detail_page.dart';
+import 'package:faq_app/presentation/screen/faq_list/provider/faq_list_notifier.dart';
+import 'package:faq_app/presentation/screen/home_page/provider/home_notifier.dart';
+import 'package:faq_app/presentation/screen/home_page/ui/home_page.dart';
+import 'package:faq_app/presentation/screen/splash_screen/ui/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'di/dependency.dart' as di;
 import 'di/dependency.dart';
+import 'presentation/screen/authentication/provider/login_notifier.dart';
+import 'presentation/screen/splash_screen/provider/splash_notifier.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,6 +32,9 @@ class FaqApp extends StatelessWidget {
                 isTokenExistsUseCase: locator(),
               ),
           child: const SplashScreen()),
+      navigatorObservers: [
+        routeObserver,
+      ],
       onGenerateRoute: (settings) {
         switch (settings.name) {
           case LoginPage.routeName:
@@ -40,9 +47,27 @@ class FaqApp extends StatelessWidget {
                     child: const LoginPage()));
           case HomePage.routeName:
             return MaterialPageRoute(
-                builder: (_) => ChangeNotifierProvider(
-                      create: (_) => HomeNotifier(),
+                builder: (_) => MultiProvider(
+                      providers: [
+                        ChangeNotifierProvider(
+                          create: (_) => HomeNotifier(),
+                        ),
+                        ChangeNotifierProvider(
+                            create: (_) =>
+                                FaqListNotifier(fetchFaqListUseCase: locator()))
+                      ],
                       child: const HomePage(),
+                    ));
+          case DetailPage.routeName:
+            return MaterialPageRoute(
+                builder: (_) => ChangeNotifierProvider(
+                      create: (_) => DetailNotifier(
+                          fetchFaqDetailUseCase: locator(),
+                          updateFaqDetailUseCase: locator(),
+                          deleteFaqUseCase: locator()),
+                      child: DetailPage(
+                        faqId: settings.arguments as int,
+                      ),
                     ));
           default:
         }

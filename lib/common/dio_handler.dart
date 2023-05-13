@@ -21,10 +21,7 @@ class DioHandler {
     );
 
     final dio = Dio(options);
-    dio.interceptors.add(InterceptorsWrapper(onRequest: (option, handler) {
-      options.headers['Authorization'] = 'Bearer $bearerToken';
-      return handler.next(option);
-    }));
+    dio.options.headers["Authorization"] = "Bearer $bearerToken";
 
     return dio;
   }

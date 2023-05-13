@@ -4,15 +4,14 @@ import 'package:faq_app/common/use_case.dart';
 import 'package:faq_app/data/model/response/login_response.dart';
 import 'package:faq_app/domain/repository/faq_repository.dart';
 
-class SaveBearerTokenUseCase extends UseCase<bool, LoginResponse> {
+class GetUserDataUseCase extends UseCase<LoginResponse, NoParam> {
   final FaqRepository repository;
-
-  SaveBearerTokenUseCase({
+  GetUserDataUseCase({
     required this.repository,
   });
 
   @override
-  Future<Either<FailureResponse, bool>> execute(LoginResponse params) async {
-    return await repository.saveBearerToken(params);
+  Future<Either<FailureResponse, LoginResponse>> execute(NoParam params) async {
+    return await repository.getUserData();
   }
 }

@@ -21,10 +21,10 @@ class FaqRepositoryImpl implements FaqRepository {
 
   @override
   Future<Either<FailureResponse, bool>> saveBearerToken(
-      String bearerToken) async {
+      LoginResponse response) async {
     try {
-      final response = await localDataSource.saveBearerToken(bearerToken);
-      return Right(response);
+      final result = await localDataSource.saveBearerToken(response);
+      return Right(result);
     } catch (error) {
       return Left(ServerFailure(error.toString()));
     }
@@ -34,8 +34,8 @@ class FaqRepositoryImpl implements FaqRepository {
   Future<Either<FailureResponse, LoginResponse>> loginUser(
       {required LoginRequest request}) async {
     try {
-      final response = await remoteDataSource.loginUser(request: request);
-      return Right(response);
+      final result = await remoteDataSource.loginUser(request: request);
+      return Right(result);
     } catch (error) {
       return Left(ServerFailure(error.toString()));
     }
@@ -44,8 +44,8 @@ class FaqRepositoryImpl implements FaqRepository {
   @override
   Future<Either<FailureResponse, NoDataResponse>> logoutUser() async {
     try {
-      final response = await remoteDataSource.logoutUser();
-      return Right(response);
+      final result = await remoteDataSource.logoutUser();
+      return Right(result);
     } catch (error) {
       return Left(ServerFailure(error.toString()));
     }
@@ -54,8 +54,8 @@ class FaqRepositoryImpl implements FaqRepository {
   @override
   Future<Either<FailureResponse, FaqListResponse>> fetchFaqList() async {
     try {
-      final response = await remoteDataSource.fetchFaqList();
-      return Right(response);
+      final result = await remoteDataSource.fetchFaqList();
+      return Right(result);
     } catch (error) {
       return Left(ServerFailure(error.toString()));
     }
@@ -65,8 +65,8 @@ class FaqRepositoryImpl implements FaqRepository {
   Future<Either<FailureResponse, DetailFaqResponse>> postFaq(
       {required PostFaqRequest request}) async {
     try {
-      final response = await remoteDataSource.postFaq(request: request);
-      return Right(response);
+      final result = await remoteDataSource.postFaq(request: request);
+      return Right(result);
     } catch (error) {
       return Left(ServerFailure(error.toString()));
     }
@@ -76,19 +76,20 @@ class FaqRepositoryImpl implements FaqRepository {
   Future<Either<FailureResponse, DetailFaqResponse>> fetchFaqDetail(
       int faqId) async {
     try {
-      final response = await remoteDataSource.fetchFaqDetail(faqId);
-      return Right(response);
+      final result = await remoteDataSource.fetchFaqDetail(faqId);
+      return Right(result);
     } catch (error) {
       return Left(ServerFailure(error.toString()));
     }
   }
 
   @override
-  Future<Either<FailureResponse, DetailFaqResponse>> updateFaqDetail(
-      int faqId) async {
+  Future<Either<FailureResponse, DetailFaqResponse>> updateFaqDetail(int faqId,
+      {required PostFaqRequest request}) async {
     try {
-      final response = await remoteDataSource.updateFaqDetail(faqId);
-      return Right(response);
+      final result =
+          await remoteDataSource.updateFaqDetail(faqId, request: request);
+      return Right(result);
     } catch (error) {
       return Left(ServerFailure(error.toString()));
     }
@@ -97,8 +98,8 @@ class FaqRepositoryImpl implements FaqRepository {
   @override
   Future<Either<FailureResponse, NoDataResponse>> deleteFaq(int faqId) async {
     try {
-      final response = await remoteDataSource.deleteFaq(faqId);
-      return Right(response);
+      final result = await remoteDataSource.deleteFaq(faqId);
+      return Right(result);
     } catch (error) {
       return Left(ServerFailure(error.toString()));
     }
@@ -107,11 +108,19 @@ class FaqRepositoryImpl implements FaqRepository {
   @override
   Future<Either<FailureResponse, String>> isTokenExists() async {
     try {
-      final response = localDataSource.isTokenExists();
-      print("DATA $response");
-      return Right(response);
+      final result = localDataSource.isTokenExists();
+      return Right(result);
     } catch (error) {
-      print(error.toString());
+      return Left(ServerFailure(error.toString()));
+    }
+  }
+
+  @override
+  Future<Either<FailureResponse, LoginResponse>> getUserData() async {
+    try {
+      final result = await localDataSource.getUserData();
+      return Right(result);
+    } catch (error) {
       return Left(ServerFailure(error.toString()));
     }
   }

@@ -1,9 +1,10 @@
 import 'package:faq_app/common/constants.dart';
 import 'package:faq_app/di/dependency.dart';
-import 'package:faq_app/presentation/faq_list/provider/faq_list_notifier.dart';
-import 'package:faq_app/presentation/faq_list/ui/faq_list_screen.dart';
-import 'package:faq_app/presentation/home_page/provider/home_notifier.dart';
-import 'package:faq_app/presentation/profile/ui/profile_screen.dart';
+import 'package:faq_app/presentation/screen/faq_list/provider/faq_list_notifier.dart';
+import 'package:faq_app/presentation/screen/faq_list/ui/faq_list_screen.dart';
+import 'package:faq_app/presentation/screen/home_page/provider/home_notifier.dart';
+import 'package:faq_app/presentation/screen/profile/provider/profile_notifier.dart';
+import 'package:faq_app/presentation/screen/profile/ui/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,8 +17,10 @@ class HomePage extends StatelessWidget {
     List<Widget> pageList = [
       ChangeNotifierProvider(
           create: (_) => FaqListNotifier(fetchFaqListUseCase: locator()),
-          child: FaqListScreen()),
-      ProfileScreen(),
+          child: const FaqListScreen()),
+      ChangeNotifierProvider(
+          create: (_) => ProfileNotifier(getUserDataUseCase: locator()),
+          child: const ProfileScreen()),
     ];
 
     List<BottomNavigationBarItem> bottomNavList = [

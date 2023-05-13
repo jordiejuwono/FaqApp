@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:faq_app/common/constants.dart';
 import 'package:faq_app/common/state_enum.dart';
-import 'package:faq_app/presentation/authentication/ui/login_page.dart';
-import 'package:faq_app/presentation/home_page/ui/home_page.dart';
-import 'package:faq_app/presentation/splash_screen/provider/splash_notifier.dart';
+import 'package:faq_app/presentation/screen/authentication/ui/login_page.dart';
+import 'package:faq_app/presentation/screen/home_page/ui/home_page.dart';
+import 'package:faq_app/presentation/screen/splash_screen/provider/splash_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

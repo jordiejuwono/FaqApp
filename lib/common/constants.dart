@@ -44,6 +44,7 @@ final TextStyle kTextExtraSmallNormal = GoogleFonts.poppins(
 
 class PreferenceKey {
   static get bearerToken => 'bearerToken';
+  static get userData => 'userData';
 }
 
 class AppConstants {

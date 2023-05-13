@@ -17,7 +17,8 @@ abstract class RemoteDataSource {
   Future<FaqListResponse> fetchFaqList();
   Future<DetailFaqResponse> postFaq({required PostFaqRequest request});
   Future<DetailFaqResponse> fetchFaqDetail(int faqId);
-  Future<DetailFaqResponse> updateFaqDetail(int faqId);
+  Future<DetailFaqResponse> updateFaqDetail(int faqId,
+      {required PostFaqRequest request});
   Future<NoDataResponse> deleteFaq(int faqId);
 }
 
@@ -35,11 +36,9 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       final response =
           await dio.post('${AppConstants.baseUrl}auth/login', data: formData);
       return LoginResponse.fromJson(response.data);
-    } catch (error) {
-      print(error.toString());
-      // throw ServerFailure(error.response?.data["message"]["error"] ??
-      //     "Email / Password yang anda masukkan salah");
-      throw ServerFailure(error.toString());
+    } on DioError catch (error) {
+      throw ServerFailure(error.response?.data["message"]["error"] ??
+          "Email / Password yang anda masukkan salah");
     }
   }
 
@@ -90,10 +89,14 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   }
 
   @override
-  Future<DetailFaqResponse> updateFaqDetail(int faqId) async {
+  Future<DetailFaqResponse> updateFaqDetail(int faqId,
+      {required PostFaqRequest request}) async {
     try {
-      final response =
-          await dio.post('${AppConstants.baseUrl}superadmin/faq/$faqId');
+      final formData = FormData.fromMap(request.toJson());
+      final response = await dio.post(
+        '${AppConstants.baseUrl}superadmin/faq/$faqId',
+        data: formData,
+      );
       return DetailFaqResponse.fromJson(response.data);
     } on DioError catch (error) {
       throw ServerFailure(error.response?.data["message"] ??
