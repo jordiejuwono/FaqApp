@@ -16,6 +16,7 @@ abstract class RemoteDataSource {
   // Faq
   Future<FaqListResponse> fetchFaqList();
   Future<DetailFaqResponse> postFaq({required PostFaqRequest request});
+  Future<DetailFaqResponse> fetchFaqDetail(int faqId);
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
@@ -69,6 +70,18 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     } on DioError catch (error) {
       throw ServerFailure(
           error.response?.data["message"] ?? "Input FAQ baru gagal");
+    }
+  }
+
+  @override
+  Future<DetailFaqResponse> fetchFaqDetail(int faqId) async {
+    try {
+      final response =
+          await dio.get('${AppConstants.baseUrl}superadmin/faq/$faqId');
+      return DetailFaqResponse.fromJson(response.data);
+    } on DioError catch (error) {
+      throw ServerFailure(
+          error.response?.data["message"] ?? "Data FAQ tidak ditemukan");
     }
   }
 }

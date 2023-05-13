@@ -4,6 +4,7 @@ import 'package:faq_app/data/datasource/local_data_source.dart';
 import 'package:faq_app/data/datasource/remote_data_source.dart';
 import 'package:faq_app/data/repository/faq_repository_impl.dart';
 import 'package:faq_app/domain/repository/faq_repository.dart';
+import 'package:faq_app/domain/usecase/fetch_faq_detail_use_case.dart';
 import 'package:faq_app/domain/usecase/fetch_faq_list_use_case.dart';
 import 'package:faq_app/domain/usecase/login_user_use_case.dart';
 import 'package:faq_app/domain/usecase/logout_user_use_case.dart';
@@ -48,4 +49,6 @@ void _registerDomains() {
   locator
       .registerLazySingleton(() => FetchFaqListUseCase(repository: locator()));
   locator.registerLazySingleton(() => PostFaqUseCase(repository: locator()));
+  locator.registerLazySingleton(
+      () => FetchFaqDetailUseCase(repository: locator()));
 }

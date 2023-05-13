@@ -18,4 +18,6 @@ abstract class FaqRepository {
   Future<Either<FailureResponse, FaqListResponse>> fetchFaqList();
   Future<Either<FailureResponse, DetailFaqResponse>> postFaq(
       {required PostFaqRequest request});
+  Future<Either<FailureResponse, DetailFaqResponse>> fetchFaqDetail(
+      String faqId);
 }

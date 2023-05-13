@@ -71,4 +71,15 @@ class FaqRepositoryImpl implements FaqRepository {
       return Left(ServerFailure(error.toString()));
     }
   }
+
+  @override
+  Future<Either<FailureResponse, DetailFaqResponse>> fetchFaqDetail(
+      int faqId) async {
+    try {
+      final response = await remoteDataSource.fetchFaqDetail(faqId);
+      return Right(response);
+    } catch (error) {
+      return Left(ServerFailure(error.toString()));
+    }
+  }
 }
