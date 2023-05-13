@@ -10,6 +10,7 @@ import 'package:faq_app/data/model/response/detail_faq_response.dart';
 abstract class FaqRepository {
   // local
   Future<Either<FailureResponse, bool>> saveBearerToken(String bearerToken);
+  Future<Either<FailureResponse, String>> isTokenExists();
 
   // remote
   Future<Either<FailureResponse, LoginResponse>> loginUser(

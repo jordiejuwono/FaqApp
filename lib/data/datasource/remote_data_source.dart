@@ -35,9 +35,11 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       final response =
           await dio.post('${AppConstants.baseUrl}auth/login', data: formData);
       return LoginResponse.fromJson(response.data);
-    } on DioError catch (error) {
-      throw ServerFailure(error.response?.data["message"]["error"] ??
-          "Email / Password yang anda masukkan salah");
+    } catch (error) {
+      print(error.toString());
+      // throw ServerFailure(error.response?.data["message"]["error"] ??
+      //     "Email / Password yang anda masukkan salah");
+      throw ServerFailure(error.toString());
     }
   }
 

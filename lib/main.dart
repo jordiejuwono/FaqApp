@@ -1,5 +1,9 @@
-import 'package:faq_app/presentation/authentication/login_notifier.dart';
-import 'package:faq_app/presentation/authentication/login_page.dart';
+import 'package:faq_app/presentation/authentication/provider/login_notifier.dart';
+import 'package:faq_app/presentation/authentication/ui/login_page.dart';
+import 'package:faq_app/presentation/home_page/provider/home_notifier.dart';
+import 'package:faq_app/presentation/home_page/ui/home_page.dart';
+import 'package:faq_app/presentation/splash_screen/provider/splash_notifier.dart';
+import 'package:faq_app/presentation/splash_screen/ui/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,11 +24,10 @@ class FaqApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: ChangeNotifierProvider(
-          create: (_) => LoginNotifier(
-                loginUserUseCase: locator(),
-                saveBearerTokenUseCase: locator(),
+          create: (_) => SplashNotifier(
+                isTokenExistsUseCase: locator(),
               ),
-          child: LoginPage()),
+          child: const SplashScreen()),
       onGenerateRoute: (settings) {
         switch (settings.name) {
           case LoginPage.routeName:
@@ -35,6 +38,12 @@ class FaqApp extends StatelessWidget {
                           saveBearerTokenUseCase: locator(),
                         ),
                     child: const LoginPage()));
+          case HomePage.routeName:
+            return MaterialPageRoute(
+                builder: (_) => ChangeNotifierProvider(
+                      create: (_) => HomeNotifier(),
+                      child: const HomePage(),
+                    ));
           default:
         }
       },

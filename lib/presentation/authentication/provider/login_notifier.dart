@@ -25,10 +25,12 @@ class LoginNotifier extends ChangeNotifier {
 
     final response = await loginUserUseCase.execute(request);
     response.fold((failure) {
+      print(failure.errorMessage);
       _errorMessage = failure.errorMessage;
       _loginState = RequestState.error;
       notifyListeners();
     }, (response) {
+      print(response);
       saveToken(response.data?.accessToken ?? "");
     });
   }
@@ -36,6 +38,7 @@ class LoginNotifier extends ChangeNotifier {
   Future<void> saveToken(String token) async {
     final response = await saveBearerTokenUseCase.execute(token);
     response.fold((failure) {
+      print(failure.errorMessage);
       _errorMessage = failure.errorMessage;
       _loginState = RequestState.error;
       notifyListeners();

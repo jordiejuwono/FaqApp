@@ -7,6 +7,7 @@ import 'package:faq_app/domain/repository/faq_repository.dart';
 import 'package:faq_app/domain/usecase/delete_faq_use_case.dart';
 import 'package:faq_app/domain/usecase/fetch_faq_detail_use_case.dart';
 import 'package:faq_app/domain/usecase/fetch_faq_list_use_case.dart';
+import 'package:faq_app/domain/usecase/is_token_exists_use_case.dart';
 import 'package:faq_app/domain/usecase/login_user_use_case.dart';
 import 'package:faq_app/domain/usecase/logout_user_use_case.dart';
 import 'package:faq_app/domain/usecase/post_faq_use_case.dart';
@@ -47,6 +48,8 @@ void _registerDomains() {
   locator.registerLazySingleton(() => LoginUserUseCase(repository: locator()));
   locator.registerLazySingleton(
       () => SaveBearerTokenUseCase(repository: locator()));
+  locator
+      .registerLazySingleton(() => IsTokenExistsUseCase(repository: locator()));
   locator.registerLazySingleton(() => LogoutUserUseCase(repository: locator()));
   locator
       .registerLazySingleton(() => FetchFaqListUseCase(repository: locator()));

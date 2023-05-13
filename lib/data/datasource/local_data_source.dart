@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class LocalDataSource {
   Future<bool> saveBearerToken(String bearerToken);
+  String isTokenExists();
 }
 
 class LocalDataSourceImpl implements LocalDataSource {
@@ -21,5 +22,10 @@ class LocalDataSourceImpl implements LocalDataSource {
     } catch (error) {
       throw DatabaseFailure(error.toString());
     }
+  }
+
+  @override
+  String isTokenExists() {
+    return sharedPreferences.getString(PreferenceKey.bearerToken) ?? "";
   }
 }

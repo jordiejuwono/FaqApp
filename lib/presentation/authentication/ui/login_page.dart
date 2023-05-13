@@ -1,5 +1,5 @@
 import 'package:faq_app/data/model/request/login_request.dart';
-import 'package:faq_app/presentation/authentication/login_notifier.dart';
+import 'package:faq_app/presentation/authentication/provider/login_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

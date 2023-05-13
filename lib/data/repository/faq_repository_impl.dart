@@ -103,4 +103,16 @@ class FaqRepositoryImpl implements FaqRepository {
       return Left(ServerFailure(error.toString()));
     }
   }
+
+  @override
+  Future<Either<FailureResponse, String>> isTokenExists() async {
+    try {
+      final response = localDataSource.isTokenExists();
+      print("DATA $response");
+      return Right(response);
+    } catch (error) {
+      print(error.toString());
+      return Left(ServerFailure(error.toString()));
+    }
+  }
 }
