@@ -39,7 +39,7 @@ void _registerDomains() {
   locator.registerLazySingleton<RemoteDataSource>(
       () => RemoteDataSourceImpl(dio: locator()));
   locator.registerLazySingleton<LocalDataSource>(
-      () => LocalDataSourceImpl(sharedPreferences: locator()));
+      () => LocalDataSourceImpl(sharedPreferences: locator(), dio: locator()));
 
   // repository
   locator.registerLazySingleton<FaqRepository>(() => FaqRepositoryImpl(

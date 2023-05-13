@@ -19,7 +19,10 @@ class HomePage extends StatelessWidget {
           create: (_) => FaqListNotifier(fetchFaqListUseCase: locator()),
           child: const FaqListScreen()),
       ChangeNotifierProvider(
-          create: (_) => ProfileNotifier(getUserDataUseCase: locator()),
+          create: (_) => ProfileNotifier(
+                getUserDataUseCase: locator(),
+                logoutUserUseCase: locator(),
+              ),
           child: const ProfileScreen()),
     ];
 

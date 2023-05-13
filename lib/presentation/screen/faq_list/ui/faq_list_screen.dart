@@ -1,7 +1,7 @@
 import 'package:faq_app/common/constants.dart';
 import 'package:faq_app/common/state_enum.dart';
 import 'package:faq_app/data/model/response/faq_list_response.dart';
-import 'package:faq_app/presentation/components/faq_item.dart';
+import 'package:faq_app/presentation/components/card/faq_item.dart';
 import 'package:faq_app/presentation/screen/detail/ui/detail_page.dart';
 import 'package:faq_app/presentation/screen/faq_list/provider/faq_list_notifier.dart';
 import 'package:flutter/material.dart';

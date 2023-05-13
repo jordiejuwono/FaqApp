@@ -21,9 +21,9 @@ class FaqRepositoryImpl implements FaqRepository {
 
   @override
   Future<Either<FailureResponse, bool>> saveBearerToken(
-      LoginResponse response) async {
+      LoginResponse loginResponse) async {
     try {
-      final result = await localDataSource.saveBearerToken(response);
+      final result = await localDataSource.saveBearerToken(loginResponse);
       return Right(result);
     } catch (error) {
       return Left(ServerFailure(error.toString()));

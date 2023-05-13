@@ -41,8 +41,6 @@ class LoginNotifier extends ChangeNotifier {
       _loginState = RequestState.error;
       notifyListeners();
     }, (response) {
-      print(response);
-      print(loginResponse);
       _loginState = RequestState.loaded;
       notifyListeners();
     });
