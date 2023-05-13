@@ -29,7 +29,7 @@ class LoginNotifier extends ChangeNotifier {
       _loginState = RequestState.error;
       notifyListeners();
     }, (response) {
-      saveToken(response.data.accessToken);
+      saveToken(response.data?.accessToken ?? "");
     });
   }
 
@@ -41,7 +41,6 @@ class LoginNotifier extends ChangeNotifier {
       notifyListeners();
     }, (response) {
       print(response);
-      print(token);
       _loginState = RequestState.loaded;
       notifyListeners();
     });

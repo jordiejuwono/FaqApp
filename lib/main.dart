@@ -21,7 +21,9 @@ class FaqApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: ChangeNotifierProvider(
           create: (_) => LoginNotifier(
-              loginUserUseCase: locator(), saveBearerTokenUseCase: locator()),
+                loginUserUseCase: locator(),
+                saveBearerTokenUseCase: locator(),
+              ),
           child: LoginPage()),
       onGenerateRoute: (settings) {
         switch (settings.name) {
@@ -29,8 +31,9 @@ class FaqApp extends StatelessWidget {
             return MaterialPageRoute(
                 builder: (_) => ChangeNotifierProvider(
                     create: (_) => LoginNotifier(
-                        loginUserUseCase: locator(),
-                        saveBearerTokenUseCase: locator()),
+                          loginUserUseCase: locator(),
+                          saveBearerTokenUseCase: locator(),
+                        ),
                     child: const LoginPage()));
           default:
         }

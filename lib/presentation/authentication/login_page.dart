@@ -45,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
                     nip: _emailController.text,
                     password: _passwordController.text));
               },
-              child: Text("Login"))
+              child: Text("Login")),
         ],
       ),
     );

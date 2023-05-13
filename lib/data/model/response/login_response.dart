@@ -1,12 +1,12 @@
 class LoginResponse {
   int code;
   String message;
-  LoginData data;
+  LoginData? data;
 
   LoginResponse({
     required this.code,
     required this.message,
-    required this.data,
+    this.data,
   });
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) => LoginResponse(
@@ -18,7 +18,7 @@ class LoginResponse {
   Map<String, dynamic> toJson() => {
         "code": code,
         "message": message,
-        "data": data.toJson(),
+        "data": data?.toJson(),
       };
 }
 
