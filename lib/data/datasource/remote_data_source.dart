@@ -5,18 +5,20 @@ import 'package:faq_app/data/model/request/login_request.dart';
 import 'package:faq_app/data/model/request/post_faq_request.dart';
 import 'package:faq_app/data/model/response/faq_list_response.dart';
 import 'package:faq_app/data/model/response/login_response.dart';
-import 'package:faq_app/data/model/response/logout_response.dart';
+import 'package:faq_app/data/model/response/no_data_response.dart';
 import 'package:faq_app/data/model/response/detail_faq_response.dart';
 
 abstract class RemoteDataSource {
   // Auth
   Future<LoginResponse> loginUser({required LoginRequest request});
-  Future<LogoutResponse> logoutUser();
+  Future<NoDataResponse> logoutUser();
 
   // Faq
   Future<FaqListResponse> fetchFaqList();
   Future<DetailFaqResponse> postFaq({required PostFaqRequest request});
   Future<DetailFaqResponse> fetchFaqDetail(int faqId);
+  Future<DetailFaqResponse> updateFaqDetail(int faqId);
+  Future<NoDataResponse> deleteFaq(int faqId);
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
@@ -40,10 +42,10 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   }
 
   @override
-  Future<LogoutResponse> logoutUser() async {
+  Future<NoDataResponse> logoutUser() async {
     try {
       final response = await dio.post('${AppConstants.baseUrl}logout');
-      return LogoutResponse.fromJson(response.data);
+      return NoDataResponse.fromJson(response.data);
     } on DioError catch (error) {
       throw ServerFailure(error.toString());
     }
@@ -82,6 +84,30 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     } on DioError catch (error) {
       throw ServerFailure(
           error.response?.data["message"] ?? "Data FAQ tidak ditemukan");
+    }
+  }
+
+  @override
+  Future<DetailFaqResponse> updateFaqDetail(int faqId) async {
+    try {
+      final response =
+          await dio.post('${AppConstants.baseUrl}superadmin/faq/$faqId');
+      return DetailFaqResponse.fromJson(response.data);
+    } on DioError catch (error) {
+      throw ServerFailure(error.response?.data["message"] ??
+          "Update FAQ gagal, silahkan coba kembali");
+    }
+  }
+
+  @override
+  Future<NoDataResponse> deleteFaq(int faqId) async {
+    try {
+      final response =
+          await dio.delete('${AppConstants.baseUrl}superadmin/faq/$faqId');
+      return NoDataResponse.fromJson(response.data);
+    } on DioError catch (error) {
+      throw ServerFailure(error.response?.data["message"] ??
+          "Update FAQ gagal, silahkan coba kembali");
     }
   }
 }

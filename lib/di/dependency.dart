@@ -4,12 +4,14 @@ import 'package:faq_app/data/datasource/local_data_source.dart';
 import 'package:faq_app/data/datasource/remote_data_source.dart';
 import 'package:faq_app/data/repository/faq_repository_impl.dart';
 import 'package:faq_app/domain/repository/faq_repository.dart';
+import 'package:faq_app/domain/usecase/delete_faq_use_case.dart';
 import 'package:faq_app/domain/usecase/fetch_faq_detail_use_case.dart';
 import 'package:faq_app/domain/usecase/fetch_faq_list_use_case.dart';
 import 'package:faq_app/domain/usecase/login_user_use_case.dart';
 import 'package:faq_app/domain/usecase/logout_user_use_case.dart';
 import 'package:faq_app/domain/usecase/post_faq_use_case.dart';
 import 'package:faq_app/domain/usecase/save_bearer_token_use_case.dart';
+import 'package:faq_app/domain/usecase/update_faq_detail_use_case.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -51,4 +53,7 @@ void _registerDomains() {
   locator.registerLazySingleton(() => PostFaqUseCase(repository: locator()));
   locator.registerLazySingleton(
       () => FetchFaqDetailUseCase(repository: locator()));
+  locator.registerLazySingleton(
+      () => UpdateFaqDetailUseCase(repository: locator()));
+  locator.registerLazySingleton(() => DeleteFaqUseCase(repository: locator()));
 }

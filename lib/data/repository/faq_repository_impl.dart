@@ -6,7 +6,7 @@ import 'package:faq_app/data/model/request/login_request.dart';
 import 'package:faq_app/data/model/request/post_faq_request.dart';
 import 'package:faq_app/data/model/response/faq_list_response.dart';
 import 'package:faq_app/data/model/response/login_response.dart';
-import 'package:faq_app/data/model/response/logout_response.dart';
+import 'package:faq_app/data/model/response/no_data_response.dart';
 import 'package:faq_app/data/model/response/detail_faq_response.dart';
 import 'package:faq_app/domain/repository/faq_repository.dart';
 
@@ -42,7 +42,7 @@ class FaqRepositoryImpl implements FaqRepository {
   }
 
   @override
-  Future<Either<FailureResponse, LogoutResponse>> logoutUser() async {
+  Future<Either<FailureResponse, NoDataResponse>> logoutUser() async {
     try {
       final response = await remoteDataSource.logoutUser();
       return Right(response);
@@ -77,6 +77,27 @@ class FaqRepositoryImpl implements FaqRepository {
       int faqId) async {
     try {
       final response = await remoteDataSource.fetchFaqDetail(faqId);
+      return Right(response);
+    } catch (error) {
+      return Left(ServerFailure(error.toString()));
+    }
+  }
+
+  @override
+  Future<Either<FailureResponse, DetailFaqResponse>> updateFaqDetail(
+      int faqId) async {
+    try {
+      final response = await remoteDataSource.updateFaqDetail(faqId);
+      return Right(response);
+    } catch (error) {
+      return Left(ServerFailure(error.toString()));
+    }
+  }
+
+  @override
+  Future<Either<FailureResponse, NoDataResponse>> deleteFaq(int faqId) async {
+    try {
+      final response = await remoteDataSource.deleteFaq(faqId);
       return Right(response);
     } catch (error) {
       return Left(ServerFailure(error.toString()));
