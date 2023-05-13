@@ -45,3 +45,7 @@ final TextStyle kTextExtraSmallNormal = GoogleFonts.poppins(
 class PreferenceKey {
   static get bearerToken => 'bearerToken';
 }
+
+class AppConstants {
+  static get baseUrl => 'https://be.lms-staging.madrasahkemenag.com/api/v1/';
+}

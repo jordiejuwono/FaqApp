@@ -16,3 +16,7 @@ abstract class FailureResponse extends Equatable {
 class ServerFailure extends FailureResponse {
   const ServerFailure(String message) : super(message);
 }
+
+class DatabaseFailure extends FailureResponse {
+  const DatabaseFailure(String message) : super(message);
+}

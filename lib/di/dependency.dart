@@ -1,0 +1,44 @@
+import 'package:dio/dio.dart';
+import 'package:faq_app/common/dio_handler.dart';
+import 'package:faq_app/data/datasource/local_data_source.dart';
+import 'package:faq_app/data/datasource/remote_data_source.dart';
+import 'package:faq_app/data/repository/faq_repository_impl.dart';
+import 'package:faq_app/domain/repository/faq_repository.dart';
+import 'package:faq_app/domain/usecase/login_user_use_case.dart';
+import 'package:faq_app/domain/usecase/save_bearer_token_use_case.dart';
+import 'package:get_it/get_it.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+final locator = GetIt.instance;
+
+Future<void> init() async {
+  await sharedPreferences();
+  _registerDomains();
+}
+
+Future<void> sharedPreferences() async {
+  final sharedPref = await SharedPreferences.getInstance();
+  locator.registerLazySingleton(() => sharedPref);
+}
+
+void _registerDomains() {
+  // dio
+  locator.registerLazySingleton<Dio>(() => locator<DioHandler>().dio);
+  locator.registerLazySingleton<DioHandler>(
+      () => DioHandler(sharedPreferences: locator()));
+
+  // data source
+  locator.registerLazySingleton<RemoteDataSource>(
+      () => RemoteDataSourceImpl(dio: locator()));
+  locator.registerLazySingleton<LocalDataSource>(
+      () => LocalDataSourceImpl(sharedPreferences: locator()));
+
+  // repository
+  locator.registerLazySingleton<FaqRepository>(() => FaqRepositoryImpl(
+      localDataSource: locator(), remoteDataSource: locator()));
+
+  // use case
+  locator.registerLazySingleton(() => LoginUserUseCase(repository: locator()));
+  locator.registerLazySingleton(
+      () => SaveBearerTokenUseCase(repository: locator()));
+}
