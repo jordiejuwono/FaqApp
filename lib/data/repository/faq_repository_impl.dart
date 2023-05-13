@@ -45,6 +45,8 @@ class FaqRepositoryImpl implements FaqRepository {
   Future<Either<FailureResponse, NoDataResponse>> logoutUser() async {
     try {
       final result = await remoteDataSource.logoutUser();
+      // delete all shared preference here
+      await localDataSource.deleteAllLocalData();
       return Right(result);
     } catch (error) {
       return Left(ServerFailure(error.toString()));

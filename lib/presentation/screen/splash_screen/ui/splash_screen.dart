@@ -38,11 +38,25 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text(
-          "FAQ APP",
-          style: kHeading5,
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.blue,
+        body: Center(
+          child: Column(
+            children: [
+              const Icon(
+                Icons.question_answer_rounded,
+                size: 90.0,
+                color: Colors.white,
+              ),
+              Text(
+                "FAQ APP",
+                style: kHeading5.copyWith(
+                  color: Colors.white,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

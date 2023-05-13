@@ -43,8 +43,8 @@ dependencies:
   equatable: ^2.0.5
   google_fonts: ^4.0.4
   provider: ^6.0.5
-  intl: ^0.18.1
   fluttertoast: ^8.2.1
+  form_builder_validators: ^9.0.0
 
 dev_dependencies:
   flutter_test:

@@ -10,6 +10,7 @@ abstract class LocalDataSource {
   Future<bool> saveBearerToken(LoginResponse loginResponse);
   String isTokenExists();
   Future<LoginResponse> getUserData();
+  Future<bool> deleteAllLocalData();
 }
 
 class LocalDataSourceImpl implements LocalDataSource {
@@ -50,6 +51,15 @@ class LocalDataSourceImpl implements LocalDataSource {
             sharedPreferences.getString(PreferenceKey.userData) ?? ""));
         return response;
       }
+    } catch (error) {
+      throw DatabaseFailure(error.toString());
+    }
+  }
+
+  @override
+  Future<bool> deleteAllLocalData() async {
+    try {
+      return await sharedPreferences.clear();
     } catch (error) {
       throw DatabaseFailure(error.toString());
     }
