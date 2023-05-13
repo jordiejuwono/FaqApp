@@ -43,12 +43,16 @@ class _DetailPageState extends State<DetailPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.grey.shade100,
         appBar: AppBar(
+          backgroundColor: Colors.blue.shade400,
           title: Text(
             "FAQ Detail",
             style: kHeading6,
           ),
-          actions: [_detailAppBar()],
+          actions: [
+            _detailAppBar(),
+          ],
         ),
         body: _detailContent(),
       ),
@@ -65,49 +69,105 @@ class _DetailPageState extends State<DetailPage> {
         }
 
         return Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(3.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "Pertanyaan:",
-                style: kHeading6,
-              ),
-              value.isEditMode == true
-                  ? TextField(
-                      controller: _pertanyaanController,
-                    )
-                  : Text(
-                      value.faqDetail?.data.pertanyaan ?? "",
-                      style: kTextMediumBold,
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: 250.0,
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(
+                      color: Colors.grey.shade400,
+                      width: 2.0,
                     ),
-              const SizedBox(
-                height: 12.0,
-              ),
-              Text(
-                "Jawaban:",
-                style: kHeading6,
-              ),
-              value.isEditMode == true
-                  ? TextField(
-                      controller: _jawabanController,
-                    )
-                  : Text(
-                      value.faqDetail?.data.jawaban ?? "",
-                      style: kTextSmallNormal.copyWith(
-                        color: Colors.grey.shade500,
-                      ),
+                    borderRadius: BorderRadius.circular(
+                      12.0,
                     ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Pertanyaan:",
+                          style: kHeading6,
+                        ),
+                        value.isEditMode == true
+                            ? TextField(
+                                controller: _pertanyaanController,
+                              )
+                            : Text(
+                                value.faqDetail?.data.pertanyaan ?? "",
+                                style: kTextMediumBold,
+                              ),
+                        const SizedBox(
+                          height: 12.0,
+                        ),
+                        Text(
+                          "Jawaban:",
+                          style: kHeading6,
+                        ),
+                        value.isEditMode == true
+                            ? TextField(
+                                controller: _jawabanController,
+                              )
+                            : Text(
+                                value.faqDetail?.data.jawaban ?? "",
+                                style: kTextSmallNormal.copyWith(
+                                  color: Colors.grey.shade500,
+                                ),
+                              ),
+                        const SizedBox(
+                          height: 12.0,
+                        ),
+                        Text("Last updated:"),
+                        Text(
+                          value.faqDetail?.data.updatedAt.toString() ?? "",
+                          style: kTextSmallNormal.copyWith(
+                            color: Colors.grey.shade500,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
               const SizedBox(
-                height: 40.0,
+                height: 10.0,
               ),
               value.isEditMode == true
                   ? const SizedBox.shrink()
-                  : RedBackgroundButton(
-                      label: "Delete",
-                      onPressed: () {
-                        value.deleteFaq(widget.faqId);
-                      })
+                  : Align(
+                      alignment: Alignment.center,
+                      child: SizedBox(
+                        width: 120.0,
+                        child: ElevatedButton(
+                            onPressed: () {},
+                            style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all(
+                                    Colors.blue.shade400)),
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 8.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Icon(Icons.delete),
+                                  const SizedBox(
+                                    width: 8.0,
+                                  ),
+                                  Text(
+                                    "Delete",
+                                    style: kTextMediumNormal,
+                                  )
+                                ],
+                              ),
+                            )),
+                      ),
+                    )
             ],
           ),
         );

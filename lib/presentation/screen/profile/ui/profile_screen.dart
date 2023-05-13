@@ -88,9 +88,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   Text(
                     value.userData?.data?.name ?? "",
-                    style: kBodyText.copyWith(
-                      fontWeight: FontWeight.w700,
-                    ),
+                    style: kHeading6,
                   ),
                   const SizedBox(
                     height: 8.0,
@@ -102,7 +100,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   Text(
                     value.userData?.data?.level ?? "",
-                    style: kTextSmallBold,
+                    style: kTextMediumBold,
                   ),
                 ],
               ),

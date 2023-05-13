@@ -45,12 +45,13 @@ class HomePage extends StatelessWidget {
       builder: (context, value, child) {
         return Scaffold(
           bottomNavigationBar: BottomNavigationBar(
+              backgroundColor: Colors.grey.shade300,
               currentIndex: value.selectedIndex,
               selectedFontSize: 14.0,
               unselectedFontSize: 14.0,
               selectedLabelStyle: kTextSmallNormal,
-              selectedItemColor: Colors.blue,
-              unselectedItemColor: Colors.grey.shade700,
+              selectedItemColor: Colors.blue.shade800,
+              unselectedItemColor: Colors.grey.shade600,
               unselectedLabelStyle: kTextSmallNormal,
               onTap: (index) {
                 value.setSelectedIndex(index);

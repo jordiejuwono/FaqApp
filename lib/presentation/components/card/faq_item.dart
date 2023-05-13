@@ -19,10 +19,10 @@ class FaqItem extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2.0),
         child: Card(
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12.0)),
+                borderRadius: BorderRadius.circular(26.0)),
             child: Padding(
               padding: const EdgeInsets.all(12.0),
               child: Column(
