@@ -14,7 +14,7 @@ class LoginNotifier extends ChangeNotifier {
     required this.loginUserUseCase,
   });
 
-  RequestState _loginState = RequestState.loading;
+  RequestState _loginState = RequestState.empty;
   RequestState get loginState => _loginState;
 
   String _errorMessage = '';

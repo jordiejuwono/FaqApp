@@ -1,6 +1,7 @@
 import 'package:faq_app/common/constants.dart';
 import 'package:faq_app/common/state_enum.dart';
 import 'package:faq_app/data/model/request/login_request.dart';
+import 'package:faq_app/presentation/components/text_field/login_form_field.dart';
 import 'package:faq_app/presentation/screen/authentication/provider/login_notifier.dart';
 import 'package:faq_app/presentation/screen/home_page/ui/home_page.dart';
 import 'package:flutter/material.dart';
@@ -77,15 +78,12 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
                         ),
-                        Text(
-                          "Email",
-                          style: kTextMediumBold,
-                        ),
-                        FormBuilderTextField(
-                          key: _emailKey,
+                        LoginFormField(
+                          label: "Email",
+                          formKey: _emailKey,
                           controller: _emailController,
-                          name: "email",
-                          validator: FormBuilderValidators.compose([
+                          formName: "email",
+                          validators: FormBuilderValidators.compose([
                             FormBuilderValidators.required(),
                             FormBuilderValidators.email(),
                           ]),
@@ -93,15 +91,12 @@ class _LoginPageState extends State<LoginPage> {
                         const SizedBox(
                           height: 20.0,
                         ),
-                        Text(
-                          "Password",
-                          style: kTextMediumBold,
-                        ),
-                        FormBuilderTextField(
-                          key: _passwordKey,
+                        LoginFormField(
+                          label: "Password",
+                          formKey: _passwordKey,
                           controller: _passwordController,
-                          name: "password",
-                          validator: FormBuilderValidators.compose([
+                          formName: "password",
+                          validators: FormBuilderValidators.compose([
                             FormBuilderValidators.required(),
                           ]),
                         ),
@@ -140,6 +135,15 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ],
                         ),
+                        const SizedBox(
+                          height: 16.0,
+                        ),
+                        Align(
+                          alignment: Alignment.center,
+                          child: Visibility(
+                              visible: value.loginState == RequestState.loading,
+                              child: const CircularProgressIndicator()),
+                        )
                       ],
                     ),
                   ],
