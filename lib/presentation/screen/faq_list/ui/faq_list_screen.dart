@@ -1,6 +1,7 @@
 import 'package:faq_app/common/constants.dart';
 import 'package:faq_app/common/state_enum.dart';
 import 'package:faq_app/presentation/components/card/faq_item.dart';
+import 'package:faq_app/presentation/screen/add_faq/ui/add_faq_page.dart';
 import 'package:faq_app/presentation/screen/detail/ui/detail_page.dart';
 import 'package:faq_app/presentation/screen/faq_list/provider/faq_list_notifier.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +29,14 @@ class _FaqListScreenState extends State<FaqListScreen> {
       child: Scaffold(
         backgroundColor: Colors.blue.shade200,
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, AddFaqPage.routeName).then((result) {
+              if (result == true) {
+                Provider.of<FaqListNotifier>(context, listen: false)
+                    .fetchFaqList();
+              }
+            });
+          },
           child: const Icon(
             Icons.add,
             size: 26.0,
@@ -64,28 +72,33 @@ class _FaqListScreenState extends State<FaqListScreen> {
               );
             }
 
-            return ListView.builder(
-                itemCount: value.faqList?.data.length,
-                itemBuilder: (context, index) {
-                  final currentFaq = value.faqList?.data[index];
-                  final updatedAt = currentFaq?.updatedAt.toString() ?? "";
+            return RefreshIndicator(
+              onRefresh: () {
+                return value.fetchFaqList();
+              },
+              child: ListView.builder(
+                  itemCount: value.faqList?.data.length,
+                  itemBuilder: (context, index) {
+                    final currentFaq = value.faqList?.data[index];
+                    final updatedAt = currentFaq?.updatedAt.toString() ?? "";
 
-                  return FaqItem(
-                    currentFaq: currentFaq,
-                    dateTime: updatedAt.substring(0, updatedAt.indexOf(".")),
-                    onTap: () {
-                      Navigator.pushNamed(
-                        context,
-                        DetailPage.routeName,
-                        arguments: currentFaq?.id,
-                      ).then((result) {
-                        if (result == true) {
-                          value.fetchFaqList();
-                        }
-                      });
-                    },
-                  );
-                });
+                    return FaqItem(
+                      currentFaq: currentFaq,
+                      dateTime: updatedAt.substring(0, updatedAt.indexOf(".")),
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          DetailPage.routeName,
+                          arguments: currentFaq?.id,
+                        ).then((result) {
+                          if (result == true) {
+                            value.fetchFaqList();
+                          }
+                        });
+                      },
+                    );
+                  }),
+            );
           },
         ),
       ),

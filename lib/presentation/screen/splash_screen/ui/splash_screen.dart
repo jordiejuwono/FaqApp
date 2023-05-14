@@ -43,6 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
         backgroundColor: Colors.blue,
         body: Center(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Icon(
                 Icons.question_answer_rounded,

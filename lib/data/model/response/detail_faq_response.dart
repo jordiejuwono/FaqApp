@@ -26,7 +26,7 @@ class DetailFaqResponse {
 class PostData {
   String pertanyaan;
   String jawaban;
-  int statusPublish;
+  dynamic statusPublish;
   DateTime updatedAt;
   DateTime createdAt;
   int id;

@@ -2,7 +2,6 @@ import 'package:faq_app/common/constants.dart';
 import 'package:faq_app/common/state_enum.dart';
 import 'package:faq_app/data/model/request/post_faq_request.dart';
 import 'package:faq_app/domain/usecase/update_faq_detail_use_case.dart';
-import 'package:faq_app/presentation/components/button/red_background_button.dart';
 import 'package:faq_app/presentation/screen/detail/provider/detail_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -75,7 +74,7 @@ class _DetailPageState extends State<DetailPage> {
             children: [
               SizedBox(
                 width: MediaQuery.of(context).size.width,
-                height: 250.0,
+                height: 280.0,
                 child: Card(
                   shape: RoundedRectangleBorder(
                     side: BorderSide(
@@ -188,11 +187,7 @@ class _DetailPageState extends State<DetailPage> {
             Navigator.pop(context, true);
           });
         }
-        if (value.editFaqState == RequestState.loaded) {
-          Future.microtask(() {
-            Navigator.pop(context, true);
-          });
-        }
+
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: ElevatedButton(
