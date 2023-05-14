@@ -3,7 +3,7 @@
 # Simple FAQ App
 Simple CRUD (Create, Read, Update, and Delete) FAQ App.
 
-<img src="https://github.com/jordiejuwono/FaqApp/assets/95727832/e3e0f76e-ccf6-44f1-a2bb-1ac1332be611.png" width="550" height="550">
+<img src="https://github.com/jordiejuwono/FaqApp/assets/95727832/e3e0f76e-ccf6-44f1-a2bb-1ac1332be611.png" width="650" height="650">
 
 ## **FAQ App Features**
 
@@ -27,4 +27,4 @@ Simple CRUD (Create, Read, Update, and Delete) FAQ App.
 
 ### **Apps Flowchart**
 
-<img src="https://github.com/jordiejuwono/FaqApp/assets/95727832/15ddd837-4060-4519-b209-8984c7b3aa71.png" width="550" height="550">
+<img src="https://github.com/jordiejuwono/FaqApp/assets/95727832/15ddd837-4060-4519-b209-8984c7b3aa71.png" width="500" height="550">
