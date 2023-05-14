@@ -1,16 +1,30 @@
 # faq_app
 
-A new Flutter project.
+# Simple FAQ App
+Simple CRUD (Create, Read, Update, and Delete) FAQ App.
 
-## Getting Started
+<img src="https://github.com/jordiejuwono/FaqApp/assets/95727832/e3e0f76e-ccf6-44f1-a2bb-1ac1332be611.png" width="750" height="550">
 
-This project is a starting point for a Flutter application.
+## **FAQ App Features**
 
-A few resources to get you started if this is your first Flutter project:
+### **Finished Features**
+```
+- Login to application to access FAQ features
+- Create new FAQ
+- Showing FAQ list and show details of selected FAQ
+- Updating FAQ details
+- Delete selected FAQ
+- Showing profile page
+- Logout
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### **TODO**
+```
+- Showing loading when there is any progress
+- Pagination FAQ list
+- Implement Unit Tests
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### **Apps Flowchart**
+
+<img src="https://github.com/jordiejuwono/FaqApp/assets/95727832/15ddd837-4060-4519-b209-8984c7b3aa71.png" width="550" height="550">
