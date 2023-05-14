@@ -19,11 +19,9 @@ class SplashNotifier extends ChangeNotifier {
 
     final response = await isTokenExistsUseCase.execute(const NoParam());
     response.fold((failure) {
-      print(failure.errorMessage);
       _splashState = RequestState.error;
       notifyListeners();
     }, (result) {
-      print(result);
       if (result.isNotEmpty && result != "") {
         _splashState = RequestState.loaded;
         notifyListeners();

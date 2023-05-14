@@ -78,6 +78,12 @@ class FaqApp extends StatelessWidget {
                       child: const AddFaqPage(),
                     ));
           default:
+            return MaterialPageRoute(
+                builder: (_) => const Scaffold(
+                      body: Center(
+                        child: Text("Page Not Found"),
+                      ),
+                    ));
         }
       },
     );

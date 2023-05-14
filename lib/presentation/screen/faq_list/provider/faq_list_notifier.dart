@@ -20,20 +20,15 @@ class FaqListNotifier extends ChangeNotifier {
   String get errorMessage => _errorMessage;
 
   Future<void> fetchFaqList() async {
-    print("TEST");
     _faqListState = RequestState.loading;
     notifyListeners();
 
     final response = await fetchFaqListUseCase.execute(const NoParam());
     response.fold((failure) {
-      print("TEST 1");
-      print(failure.errorMessage);
       _errorMessage = failure.errorMessage;
       _faqListState = RequestState.error;
       notifyListeners();
     }, (result) {
-      print('TEST 2');
-      print(result.data[0].pertanyaan);
       _faqList = result;
       _faqListState = RequestState.loaded;
       notifyListeners();
