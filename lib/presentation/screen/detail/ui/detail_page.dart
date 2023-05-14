@@ -123,7 +123,10 @@ class _DetailPageState extends State<DetailPage> {
                         const SizedBox(
                           height: 12.0,
                         ),
-                        Text("Last updated:"),
+                        Text(
+                          "Last updated:",
+                          style: kTextSmallMediumBold,
+                        ),
                         Text(
                           value.faqDetail?.data.updatedAt.toString() ?? "",
                           style: kTextSmallNormal.copyWith(
@@ -145,7 +148,9 @@ class _DetailPageState extends State<DetailPage> {
                       child: SizedBox(
                         width: 120.0,
                         child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              value.deleteFaq(widget.faqId);
+                            },
                             style: ButtonStyle(
                                 backgroundColor: MaterialStateProperty.all(
                                     Colors.blue.shade400)),

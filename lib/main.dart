@@ -1,4 +1,6 @@
 import 'package:faq_app/common/utils.dart';
+import 'package:faq_app/presentation/screen/add_faq/provider/add_faq_notifier.dart';
+import 'package:faq_app/presentation/screen/add_faq/ui/add_faq_page.dart';
 import 'package:faq_app/presentation/screen/authentication/ui/login_page.dart';
 import 'package:faq_app/presentation/screen/detail/provider/detail_notifier.dart';
 import 'package:faq_app/presentation/screen/detail/ui/detail_page.dart';
@@ -68,6 +70,12 @@ class FaqApp extends StatelessWidget {
                       child: DetailPage(
                         faqId: settings.arguments as int,
                       ),
+                    ));
+          case AddFaqPage.routeName:
+            return MaterialPageRoute(
+                builder: (_) => ChangeNotifierProvider(
+                      create: (_) => AddFaqNotifier(postFaqUseCase: locator()),
+                      child: const AddFaqPage(),
                     ));
           default:
         }
